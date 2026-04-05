@@ -7,7 +7,7 @@ test('Login', async ({ page }) => {
     await loginPage.goto();
     await loginPage.login('standard_user', 'secret_sauce');
     await loginPage.checkLogin();
-
+    //await page.screenshot({ path: 'H:/Documentos/Automation/playwright/playwright1/screenshots/purchase.png' });
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
 
