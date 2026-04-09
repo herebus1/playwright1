@@ -3,12 +3,16 @@ import { LoginPage } from './pageobjects/login_page';
 
 test('Login', async ({ page }) => {
 
-    const loginPage = new LoginPage(page);
+    await page.goto('https://www.saucedemo.com/inventory.html');
+    const itemsContainer = await page
+        .locator('#inventory_container .inventory_item')
+        .all();
+    /* const loginPage = new LoginPage(page);
     await loginPage.goto();
     await loginPage.login('standard_user', 'secret_sauce');
     await loginPage.checkLogin();
     //await page.screenshot({ path: 'H:/Documentos/Automation/playwright/playwright1/screenshots/purchase.png' });
-    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html'); */
 
 
     const items = await page.locator('#inventory_container .inventory_item').all();
@@ -42,4 +46,12 @@ test('Login', async ({ page }) => {
     expect(checkoutItemPrice).toEqual(itemPrice);
     await page.getByRole('button', { name: 'Finish' }).click();
     await expect(page.getByRole('heading', { name: 'Thank you for your order!' })).toBeVisible();
+});
+
+test('Validate cart', async ({ page }) => {
+    await page.goto('https://www.saucedemo.com/inventory.html');
+    const itemsContainer = await page
+        .locator('#inventory_container .inventory_item')
+        .all();
+
 });
